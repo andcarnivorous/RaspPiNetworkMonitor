@@ -7,10 +7,6 @@ from functools import wraps
 from sqlite3 import Error
 
 
-
-        
-
-
 def create_connection(db_file):
     """ create a database connection to a SQLite database """
     conn = None
@@ -21,7 +17,6 @@ def create_connection(db_file):
     finally:
         if conn:
             return conn
-
 
 
 def create_table(conn, create_table_sql):
@@ -37,6 +32,7 @@ def create_table(conn, create_table_sql):
     except Error as e:
         print(e)
 
+
 def send_to_db(func):
     @wraps(func)
     def wrapper():
@@ -46,6 +42,7 @@ def send_to_db(func):
             new_entry(ip, name, today)
         return (ips, names)
     return wrapper
+
 
 def new_entry(ip: str, name: str, date: str):
     """
@@ -59,7 +56,6 @@ def new_entry(ip: str, name: str, date: str):
         except sqlite3.Error as error:
             return Error
         conn.commit()
-
 
         
 def get_ip_address():
