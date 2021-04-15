@@ -11,7 +11,8 @@ if "database.db" not in os.listdir():
     ip TEXT,
     name TEXT,
     date TEXT
-    ); """
+    ); 
+    CREATE UNIQUE INDEX idx_name on visitors (name);"""
 
     with utils.create_connection("database.db") as conn:
         utils.create_table(conn, newtable)
